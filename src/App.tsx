@@ -161,7 +161,7 @@ function App() {
 
         {/* 入力フォーム */}
         <div className="bg-gray-50 p-4 sm:p-6 rounded-lg shadow mb-6">
-          <div className="flex flex-col sm:flex-row gap-2">
+          <div className="flex flex-col sm:flex-row gap-2 w-full">
             <input
               type="text"
               placeholder="タスク内容"
@@ -169,12 +169,21 @@ function App() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
-            <input
-              type="date"
-              className="border border-gray-300 rounded p-2 w-full sm:w-auto text-sm"
-              value={dueDate}
-              onChange={(e) => setDueDate(e.target.value)}
-            />
+            {/* 🔧 修正ポイント：DatePickerをラップして幅を統一 */}
+              <div className="w-full sm:w-auto">
+                <DatePicker
+                  selected={selectedDate}
+                  onChange={(date: Date | null) => {
+                    setSelectedDate(date);
+                      if (date) {
+                        setDueDate(date.toISOString().split('T')[0]); 
+                      }
+                  }}
+                      dateFormat="yyyy-MM-dd"
+                      className="w-full text-sm border px-3 py-2 rounded shadow"
+                />
+              </div>
+
             <button
               onClick={addTask}
               className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 sm:py-3 rounded text-sm"
