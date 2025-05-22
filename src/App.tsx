@@ -165,12 +165,12 @@ function App() {
             <input
               type="text"
               placeholder="タスク内容"
-              className="border border-gray-300 rounded p-2 w-full text-sm"
+              className="border border-gray-300 rounded p-2 flex-grow text-sm"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
             {/* 🔧 修正ポイント：DatePickerをラップして幅を統一 */}
-              <div className="w-full sm:w-auto">
+              <div className="w-full sm:w-[160px]">
                 <DatePicker
                   selected={selectedDate}
                   onChange={(date: Date | null) => {
@@ -180,13 +180,13 @@ function App() {
                       }
                   }}
                       dateFormat="yyyy-MM-dd"
-                      className="w-full text-sm border px-3 py-2 rounded shadow"
+                      className="w-full text-sm border p-2 rounded shadow"
                 />
               </div>
 
             <button
               onClick={addTask}
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 sm:py-3 rounded text-sm"
+              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 sm:py-3 rounded text-sm w-full sm:w-[80px]"
             >
               追加
             </button>
@@ -201,14 +201,16 @@ function App() {
         )}
 
         {/* カレンダー */}
-        <div className="flex flex-col items-stretch mb-6">
+        <div className="flex flex-col items-center mb-6">
           <label className="text-sm font-semibold text-gray-700 mb-2">📆 日付を選択</label>
+          <div className="w-full sm:w-auto">
           <DatePicker
             selected={selectedDate}
             onChange={(date: Date | null) => setSelectedDate(date)}
             dateFormat="yyyy-MM-dd"
             className="w-full border px-3 py-2 rounded shadow"
           />
+          </div>
         </div>
 
         {/* 選択した日のタスク */}
