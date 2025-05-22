@@ -28,10 +28,15 @@ function App() {
   });
 
   const [title, setTitle] = useState('');                     // 入力タスク名
-  const [dueDate, setDueDate] = useState('');                 // 入力日付
   const [message, setMessage] = useState('');                 // メッセージ表示
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date()); // カレンダー選択日
   const messageTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null); // メッセージタイマー
+
+  //今日の日付を yyyy-MM-dd 形式で表示
+  const [dueDate, setDueDate] = useState(() => {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
+  });                 // 入力日付
 
   // -------------------------
   // メッセージ表示（3秒で消える）
@@ -187,13 +192,13 @@ function App() {
         )}
 
         {/* カレンダー */}
-        <div className="flex flex-col items-center mb-6">
+        <div className="flex flex-col items-stretch mb-6">
           <label className="text-sm font-semibold text-gray-700 mb-2">📆 日付を選択</label>
           <DatePicker
             selected={selectedDate}
             onChange={(date: Date | null) => setSelectedDate(date)}
             dateFormat="yyyy-MM-dd"
-            className="border px-3 py-2 rounded shadow w-full sm:w-auto"
+            className="w-full border px-3 py-2 rounded shadow"
           />
         </div>
 
