@@ -169,20 +169,12 @@ function App() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
-            {/* 🔧 修正ポイント：DatePickerをラップして幅を統一 */}
-              <div className="w-full sm:w-[160px]">
-                <DatePicker
-                  selected={selectedDate}
-                  onChange={(date: Date | null) => {
-                    setSelectedDate(date);
-                      if (date) {
-                        setDueDate(date.toISOString().split('T')[0]); 
-                      }
-                  }}
-                      dateFormat="yyyy-MM-dd"
-                      className="w-full text-sm border p-2 rounded shadow"
-                />
-              </div>
+            <input
+              type="date"
+              className="border border-gray-300 rounded p-2 w-full sm:w-auto text-sm"
+              value={dueDate}
+              onChange={(e) => setDueDate(e.target.value)}
+            />
 
             <button
               onClick={addTask}
